@@ -45,21 +45,23 @@ const features: FeatureProps[] = [
         cbody: (<p>如果您对我们的文档或服务有任何疑问，请随时与我们联系。</p>),
         cfooter: (
             <>
-                <button className="button button--primary button--outline" 
-                onClick={() => window.open('mailto:hello@ric.moe')}>
-                    Email
-                </button>
-                <button 
-                className="button button--primary button--outline margin-horiz--xs" 
-                onClick={() => window.open('https://github.com/RichardMiku')}>
-                    <img className="margin-right--xs" src="/img/svg/github.svg" alt="GitHub" style={{ verticalAlign: '-0.15rem' }} />
-                    GitHub
-                </button>
-                <button 
-                className="button button--primary button--outline" 
-                onClick={() => window.open('/feedback')}>
-                    Feedback
-                </button>
+                <div className="button-group button-group--block">
+                    <button className="button button--primary button--outline" 
+                    onClick={() => window.open('mailto:hello@ric.moe')}>
+                        Email
+                    </button>
+                    <button 
+                    className="button button--primary button--outline" 
+                    onClick={() => window.open('https://github.com/RichardMiku')}>
+                        <img className="margin-right--xs" src="/img/svg/github.svg" alt="GitHub" style={{ verticalAlign: '-0.15rem' }} />
+                        GitHub
+                    </button>
+                    <button 
+                    className="button button--primary button--outline" 
+                    onClick={() => window.open('/feedback')}>
+                        Feedback
+                    </button>
+                </div>
             </>
         ),
     },
