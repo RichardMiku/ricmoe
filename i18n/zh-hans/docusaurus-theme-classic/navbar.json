@@ -1,0 +1,42 @@
+{
+  "title": {
+    "message": "RICMOE",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "RICMOE Logo",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.docs": {
+    "message": "文档",
+    "description": "Navbar item with label docs"
+  },
+  "item.label.Blog": {
+    "message": "博客",
+    "description": "Navbar item with label Blog"
+  },
+  "item.label.Moments": {
+    "message": "动态",
+    "description": "Navbar item with label Moments"
+  },
+  "item.label.Links": {
+    "message": "链接",
+    "description": "Navbar item with label Links"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  },
+  "item.label.文章": {
+    "message": "文章",
+    "description": "Navbar item with label 文章"
+  },
+  "item.label.归档": {
+    "message": "归档",
+    "description": "Navbar item with label 归档"
+  },
+  "item.label.标签": {
+    "message": "标签",
+    "description": "Navbar item with label 标签"
+  }
+}

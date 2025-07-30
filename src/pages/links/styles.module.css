@@ -1,0 +1,8 @@
+.LinksTagsContainer {
+    display: flex;
+    align-items: center;
+}
+
+.LinksTagItem {
+    margin-right: 1rem;
+}

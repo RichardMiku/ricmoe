@@ -1,0 +1,35 @@
+.masonry {
+  column-count: 1;
+  column-gap: 1rem;
+}
+
+.masonry :global(.card) {
+  break-inside: avoid-column;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 576px) {
+  .masonry {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 996px) {
+  .masonry {
+    column-count: 3;
+  }
+}
+
+.momentCardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.authorInfo {
+  text-align: right;
+}
+
+.momentCardFooter small {
+  color: var(--ifm-color-emphasis-600);
+} 

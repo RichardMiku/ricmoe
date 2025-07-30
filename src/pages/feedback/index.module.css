@@ -1,0 +1,85 @@
+.feedbackContainer {
+  padding: 4rem 1rem;
+  background-color: var(--ifm-background-color);
+}
+
+.feedbackFormWrapper {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.feedbackForm {
+  background-color: var(--ifm-card-background-color);
+  padding: 2.5rem;
+  border-radius: var(--ifm-card-border-radius);
+  box-shadow: var(--ifm-global-shadow-lw);
+  width: 100%;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--ifm-font-color-primary);
+}
+
+.description {
+  color: var(--ifm-font-color-secondary);
+  margin-bottom: 2rem;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--ifm-font-color-primary);
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  background-color: var(--ifm-background-color);
+  font-size: 1rem;
+  color: var(--ifm-font-color-primary);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--ifm-color-primary) 20%, transparent);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submitButton {
+  background-color: var(--ifm-color-primary);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+  background-color: var(--ifm-color-primary-dark);
+} 

@@ -1,0 +1,6 @@
+{
+  "copyright": {
+    "message": "\n        <div class=\"row row--no-gutters\">\n        \n        <div class=\"col\">\n        <span>🩷 have a nice day! 🩷</span>\n        <!--<span><a href=\"/null\">萌ICP备-00001120号</a></span>-->\n        </div>\n\n        <div class=\"col\">\n        <span>Copyright © 2020 - 2025 RICMOE.</span>\n        </div>\n\n        <div class=\"col\">\n        <span class=\"text--italic\">powered by&nbsp;</span>\n        <!-- Docusaurus图标 -->\n        <span\n        onclick=\"window.open('https://docusaurus.io/', '_blank');\" >\n        <img alt=\"docusaurus\" src=\"/img/docusaurus.svg\" width=\"32\" height=\"32\" \n        style=\"vertical-align: middle;\" />\n        <b>Docusaurus</b>\n        </span>\n        </div>\n\n        </div>\n      ",
+    "description": "The footer copyright"
+  }
+}
