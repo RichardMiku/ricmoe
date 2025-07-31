@@ -1,0 +1,57 @@
+name: Update WeChat JSAPI Ticket
+
+on:
+  schedule:
+    # 每两小时执行一次 (UTC时间)
+    - cron: '0 */2 * * *'
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  update-jsapi-ticket:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+    
+    - name: Update JSAPI Ticket
+      env:
+        WECHAT_APP_ID: ${{ secrets.WECHAT_APP_ID }}
+        WECHAT_APP_SECRET: ${{ secrets.WECHAT_APP_SECRET }}
+      run: |
+        python WeChatAccess.py
+    
+    - name: Check for changes
+      id: verify-changed-files
+      run: |
+        if [ -n "$(git status --porcelain)" ]; then
+          echo "changed=true" >> $GITHUB_OUTPUT
+        else
+          echo "changed=false" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Commit and push changes
+      if: steps.verify-changed-files.outputs.changed == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add static/js-helper/wx-share.js
+        git commit -m "自动更新微信JSAPI Ticket - $(date '+%Y-%m-%d %H:%M:%S')"
+        git push
+    
+    - name: No changes detected
+      if: steps.verify-changed-files.outputs.changed == 'false'
+      run: |
+        echo "没有检测到文件变化，跳过提交"
