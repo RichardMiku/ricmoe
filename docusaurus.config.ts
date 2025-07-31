@@ -106,7 +106,7 @@ const config: Config = {
     metadata: [
       {name: 'keywords', content: 'RICMOE, Docusaurus, documentation'},
       {name: 'author', content: 'RICMOE Team'},
-      {name: 'algolia-site-verification', content: 'CEE5A687B0B191BE'},
+      {name: 'algolia-site-verification', content: '7AA950EE5FF30F75'},
     ],
     navbar: {
       title: 'RICMOE',
@@ -233,10 +233,10 @@ const config: Config = {
     },
     algolia: {
     // The application ID provided by Algolia
-      appId: 'K85LQPNG0O',
+      appId: 'DBC4Q2LPGP',
 
       // Public API key: it is safe to commit it
-      apiKey: '303325549b856d4beaf30c21fb64cf70',
+      apiKey: 'ae47c3fa9e88626055168611b4827bb8',
 
       indexName: 'ricmoe',
 
