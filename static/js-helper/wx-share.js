@@ -1,4 +1,3 @@
-import { title } from "framer-motion/client";
 
 var jsapi_ticket = 'O3SMpm8bG7kJnF36aXbe8xNcJ5lBk8LW15uc45b3pL1pOMoKmMi7d3XgnssHbiluYTlHuYZNVGbd5z9VQbEnyw';
 var share_url = window.location.href.split('#')[0];
@@ -18,6 +17,8 @@ config_data.signature = sign_ret.signature;
 
 wx.config(config_data);
 
+console.log('wx.config', config_data);
+
 const share_title = document.title ? document.title : 'RICMOE';
 const share_description = document.querySelector('meta[name="description"]').getAttribute('content');
 
@@ -28,6 +29,7 @@ wx.ready(function() {
     link:  window.location.href.split('#')[0],
     imgUrl: 'https://www.ric.moe/img/logo.png',
   };
+  console.log('wx.ready', shareData);
   wx.onMenuShareAppMessage(shareData);
   wx.onMenuShareTimeline(shareData);
 });
