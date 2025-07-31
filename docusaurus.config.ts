@@ -39,7 +39,7 @@ const config: Config = {
 
   scripts: [
     {
-      src: 'https://cdn.jsdelivr.net/npm/jssha@3.2.0/dist/sha1.min.js',
+      src: '/js-helper/sha1.min.js',
       position: 'head',
     },
     {
