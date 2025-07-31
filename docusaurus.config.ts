@@ -238,7 +238,7 @@ const config: Config = {
       // Public API key: it is safe to commit it
       apiKey: '303325549b856d4beaf30c21fb64cf70',
 
-      indexName: 'YOUR_INDEX_NAME',
+      indexName: 'RICMOE',
 
       // Optional: see doc section below
       contextualSearch: true,
