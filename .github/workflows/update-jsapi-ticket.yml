@@ -6,6 +6,9 @@ on:
     - cron: '0 */2 * * *'
   workflow_dispatch: # 允许手动触发
 
+permissions:
+  contents: write
+
 jobs:
   update-jsapi-ticket:
     runs-on: ubuntu-latest
@@ -14,7 +17,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
     
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -36,22 +39,18 @@ jobs:
     - name: Check for changes
       id: verify-changed-files
       run: |
-        if [ -n "$(git status --porcelain)" ]; then
-          echo "changed=true" >> $GITHUB_OUTPUT
-        else
-          echo "changed=false" >> $GITHUB_OUTPUT
-        fi
+        git diff --quiet || echo "changed=true" >> $GITHUB_OUTPUT
     
     - name: Commit and push changes
       if: steps.verify-changed-files.outputs.changed == 'true'
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
         git add static/js-helper/wx-share.js
-        git commit -m "自动更新微信JSAPI Ticket - $(date '+%Y-%m-%d %H:%M:%S')"
+        git commit -m "🤖 自动更新微信JSAPI Ticket"
         git push
     
     - name: No changes detected
-      if: steps.verify-changed-files.outputs.changed == 'false'
+      if: steps.verify-changed-files.outputs.changed != 'true'
       run: |
         echo "没有检测到文件变化，跳过提交"
