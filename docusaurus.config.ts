@@ -37,6 +37,24 @@ const config: Config = {
     locales: ['zh-hant'],
   },
 
+  scripts: [
+    {
+      src: 'https://cdn.jsdelivr.net/npm/jssha@3.2.0/dist/sha1.min.js',
+      position: 'head',
+    },
+    {
+      src: 'https://res.wx.qq.com/open/js/jweixin-1.0.0.js',
+      position: 'head',
+    },
+    {
+    src: '/js-helper/pure-sign.js',
+    position: 'head',
+  },
+    {
+    src: '/js-helper/wx-share.js',
+    position: 'head',
+  }],
+
   presets: [
     [
       'classic',
