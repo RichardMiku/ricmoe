@@ -8,7 +8,7 @@ var config_data = {
     timestamp: createTimestamp(),
     nonceStr: createNonceStr(),
     signature: '',
-    jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline']
+    jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData']
 };
 
 var sign_ret = sign_custome(jsapi_ticket, config_data.nonceStr, config_data.timestamp, share_url);
@@ -30,6 +30,6 @@ wx.ready(function() {
     imgUrl: 'https://www.ric.moe/img/logo.png',
   };
   console.log('wx.ready', shareData);
-  wx.onMenuShareAppMessage(shareData);
-  wx.onMenuShareTimeline(shareData);
+  wx.updateAppMessageShareData(shareData);
+  wx.updateTimelineShareData(shareData);
 });

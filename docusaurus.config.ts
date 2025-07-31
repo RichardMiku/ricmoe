@@ -43,7 +43,7 @@ const config: Config = {
       position: 'head',
     },
     {
-      src: 'https://res.wx.qq.com/open/js/jweixin-1.0.0.js',
+      src: 'http://res.wx.qq.com/open/js/jweixin-1.6.0.js',
       position: 'head',
     },
     {
@@ -103,6 +103,10 @@ const config: Config = {
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
+    metadata: [
+      {name: 'keywords', content: 'RICMOE, Docusaurus, documentation'},
+      {name: 'author', content: 'RICMOE Team'},
+    ],
     navbar: {
       title: 'RICMOE',
       logo: {
