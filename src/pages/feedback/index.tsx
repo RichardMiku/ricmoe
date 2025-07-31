@@ -236,6 +236,13 @@ export default function FeedbackPage() {
                 ></textarea>
               </div>
             </form>
+            <div className='verificationContainer margin-bottom--md' style={{ display: 'flex'}}>
+              <span className='margin-right--md'>Verification</span>
+              <span className='text--italic text--info' 
+              onClick={() => {alert('请等候 Cloudflare Turnstile 验证器加载，若长时间无加载，请刷新页面重试，或更换网路再试一次。')}}>
+                Tips
+              </span>
+            </div>
             <div className={styles.formGroup}>
               {/* 这是 Turnstile 小部件的容器，我们把 ref 附加到这里。 */}
               <div ref={turnstileRef} />
