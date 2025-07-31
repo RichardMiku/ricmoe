@@ -1,6 +1,6 @@
 {
-  "index_name": "ricmoesearch", // 填写自己的索引名称
-  "start_urls": ["https://www.ric.moe/"], // 填写自己的网站地址
+  "index_name": "ricmoesearch",
+  "start_urls": ["https://www.ric.moe/"],
   "rateLimit": 8,
   "maxDepth": 10,
   "selectors": {
