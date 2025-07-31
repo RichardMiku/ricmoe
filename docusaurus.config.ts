@@ -106,7 +106,6 @@ const config: Config = {
     metadata: [
       {name: 'keywords', content: 'RICMOE, Docusaurus, documentation'},
       {name: 'author', content: 'RICMOE Team'},
-      {name: 'algolia-site-verification', content: '7AA950EE5FF30F75'},
     ],
     navbar: {
       title: 'RICMOE',
@@ -233,12 +232,12 @@ const config: Config = {
     },
     algolia: {
     // The application ID provided by Algolia
-      appId: 'DBC4Q2LPGP',
+      appId: 'LJBRFP5Y8O',
 
       // Public API key: it is safe to commit it
-      apiKey: 'ae47c3fa9e88626055168611b4827bb8',
+      apiKey: 'cc8a99e7336291f8b0e652ece1556280',
 
-      indexName: 'www_ric_moe_dbc4q2lpgp',
+      indexName: 'ricmoesearch',
 
       // Optional: see doc section below
       contextualSearch: true,
