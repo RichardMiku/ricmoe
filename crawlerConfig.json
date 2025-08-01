@@ -1,4 +1,5 @@
 {
+  "indexName": "ricmoesearch",
   "appId": "YOUR_APP_ID",
   "apiKey": "YOUR_API_KEY",
   "rateLimit": 8,
