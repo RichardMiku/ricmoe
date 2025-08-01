@@ -1,20 +1,43 @@
-import React, { ReactNode } from "react";
+// 重新导出新的 Moments 结构，保持向后兼容
+export { default } from './Moments/index';
+export type { MomentProps, MomentCategory } from './Moments/index';
 
-export type MomentProps = {
-    title: string;
-    content: string | ReactNode;
-    date: string;
-    author?: string;
-    location?: string;
-};
+// 导出工具函数
+export { 
+    sortMomentsByDate,
+    getMomentsByCategory,
+    getMomentsByTag,
+    getMomentsByAuthor,
+    getMomentsByDateRange,
+    getCategoryStats,
+    getAllTagsWithStats
+} from './Moments/index';
 
-const moments: MomentProps[] = [
-    {
-        title: "关于博客的更新",
-        content: "博客已迁移至 Docusaurus，欢迎访问！",
-        date: "2025-07-27",
-        author: "RicMoe",
-    },
-];
+// 导出分类数据（向后兼容）
+export { 
+    blogMoments, 
+    lifeMoments, 
+    techMoments, 
+    testMoments 
+} from './Moments/index';
 
-export default moments; 
+// 导出新的动态分类函数
+export {
+    getAllCategoryIds,
+    getCategoryConfig,
+    getAllCategories,
+    getMomentsByCategoryId,
+    getAllCategoryMoments
+} from './Moments/index';
+
+// 导出事件处理函数
+export { 
+    handleLike, 
+    handleComment, 
+    handleShare, 
+    handleVisitBlog, 
+    handleLearnMore 
+} from './Moments/index';
+
+// 注意：此文件现在仅用于向后兼容
+// 新的 moments 数据管理请使用 ./Moments/ 文件夹中的结构 
