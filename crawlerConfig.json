@@ -1,5 +1,5 @@
 {
-  "indexName": "ricmoesearch",
+  "index_name": "ricmoesearch",
   "start_urls": ["https://www.ric.moe/"],
   "rateLimit": 8,
   "maxDepth": 10,
