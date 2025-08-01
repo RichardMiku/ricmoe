@@ -9,15 +9,26 @@
       "defaultValue": "Documentation",
       "last": true
     },
-    "lvl1": [
-      "header h1",
-      "article h1"
-    ],
-    "lvl2": "article h2",
-    "lvl3": "article h3",
-    "lvl4": "article h4",
-    "lvl5": "article h5, article td:first-child",
-    "lvl6": "article h6",
-    "content": "article p, article li, article td:last-child"
+    "lvl1": {
+      "selector": "header h1, article h1"
+    },
+    "lvl2": {
+      "selector": "article h2"
+    },
+    "lvl3": {
+      "selector": "article h3"
+    },
+    "lvl4": {
+      "selector": "article h4"
+    },
+    "lvl5": {
+      "selector": "article h5, article td:first-child"
+    },
+    "lvl6": {
+      "selector": "article h6"
+    },
+    "content": {
+      "selector": "article p, article li, article td:last-child"
+    }
   }
 }
