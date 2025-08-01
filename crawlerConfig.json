@@ -1,109 +1,26 @@
 {
   "indexName": "ricmoesearch",
-  "appId": "YOUR_APP_ID",
-  "apiKey": "YOUR_API_KEY",
+  "start_urls": ["https://www.ric.moe/"],
   "rateLimit": 8,
   "maxDepth": 10,
-  "startUrls": [
-    "https://www.ric.moe/"
-  ],
-  "sitemaps": [
-    "https://www.ric.moe/sitemap.xml"
-  ],
-  "ignoreCanonicalTo": true,
-  "discoveryPatterns": [
+  "pathsToMatch": [
     "https://www.ric.moe/**"
   ],
-  "actions": [
-    {
-      "indexName": "ricmoesearch",
-      "pathsToMatch": [
-        "https://www.ric.moe/**"
-      ],
-      "recordExtractor": {
-        "lvl0": {
-          "selectors": ".menu__link.menu__link--sublist.menu__link--active, .navbar__item.navbar__link--active",
-          "defaultValue": "Documentation",
-          "last": true
-        },
-        "lvl1": [
-          "header h1",
-          "article h1"
-        ],
-        "lvl2": "article h2",
-        "lvl3": "article h3",
-        "lvl4": "article h4",
-        "lvl5": "article h5, article td:first-child",
-        "lvl6": "article h6",
-        "content": "article p, article li, article td:last-child"
-      }
-    }
-  ],
-  "initialIndexSettings": {
-    "ricmoesearch": {
-      "attributesForFaceting": [
-        "type",
-        "lang",
-        "language",
-        "version",
-        "docusaurus_tag"
-      ],
-      "attributesToRetrieve": [
-        "hierarchy",
-        "content",
-        "anchor",
-        "url",
-        "url_without_anchor",
-        "type"
-      ],
-      "attributesToHighlight": [
-        "hierarchy",
-        "content"
-      ],
-      "attributesToSnippet": [
-        "content:10"
-      ],
-      "camelCaseAttributes": [
-        "hierarchy",
-        "content"
-      ],
-      "searchableAttributes": [
-        "unordered(hierarchy.lvl0)",
-        "unordered(hierarchy.lvl1)",
-        "unordered(hierarchy.lvl2)",
-        "unordered(hierarchy.lvl3)",
-        "unordered(hierarchy.lvl4)",
-        "unordered(hierarchy.lvl5)",
-        "unordered(hierarchy.lvl6)",
-        "content"
-      ],
-      "distinct": true,
-      "attributeForDistinct": "url",
-      "customRanking": [
-        "desc(weight.pageRank)",
-        "desc(weight.level)",
-        "asc(weight.position)"
-      ],
-      "ranking": [
-        "words",
-        "filters",
-        "typo",
-        "attribute",
-        "proximity",
-        "exact",
-        "custom"
-      ],
-      "highlightPreTag": "<span class=\"algolia-docsearch-suggestion--highlight\">",
-      "highlightPostTag": "</span>",
-      "minWordSizefor1Typo": 3,
-      "minWordSizefor2Typos": 7,
-      "allowTyposOnNumericTokens": false,
-      "minProximity": 1,
-      "ignorePlurals": true,
-      "advancedSyntax": true,
-      "attributeCriteriaComputedByMinProximity": true,
-      "removeWordsIfNoResults": "allOptional",
-      "separatorsToIndex": "_"
-    }
+  "recordExtractor": {
+    "lvl0": {
+      "selectors": ".menu__link.menu__link--sublist.menu__link--active, .navbar__item.navbar__link--active",
+      "defaultValue": "Documentation",
+      "last": true
+    },
+    "lvl1": [
+      "header h1",
+      "article h1"
+    ],
+    "lvl2": "article h2",
+    "lvl3": "article h3",
+    "lvl4": "article h4",
+    "lvl5": "article h5, article td:first-child",
+    "lvl6": "article h6",
+    "content": "article p, article li, article td:last-child"
   }
 }
