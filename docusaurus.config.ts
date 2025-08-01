@@ -106,6 +106,7 @@ const config: Config = {
     metadata: [
       {name: 'keywords', content: 'RICMOE, Docusaurus, documentation'},
       {name: 'author', content: 'RICMOE Team'},
+      {name: 'algolia-site-verification', content: '7406413BDF2D33E2'},
     ],
     navbar: {
       title: 'RICMOE',
