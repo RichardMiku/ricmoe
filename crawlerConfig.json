@@ -3,10 +3,7 @@
   "start_urls": ["https://www.ric.moe/"],
   "rateLimit": 8,
   "maxDepth": 10,
-  "pathsToMatch": [
-    "https://www.ric.moe/**"
-  ],
-  "recordExtractor": {
+  "selectors": {
     "lvl0": {
       "selectors": ".menu__link.menu__link--sublist.menu__link--active, .navbar__item.navbar__link--active",
       "defaultValue": "Documentation",
