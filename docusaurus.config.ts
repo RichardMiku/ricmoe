@@ -238,7 +238,7 @@ const config: Config = {
       // Public API key: it is safe to commit it
       apiKey: 'cc8a99e7336291f8b0e652ece1556280',
 
-      indexName: 'ricmoesearch',
+      indexName: 'ricmoedocusaurus',
 
       // Optional: see doc section below
       contextualSearch: true,
