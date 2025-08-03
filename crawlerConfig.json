@@ -1,6 +1,42 @@
 {
   "index_name": "ricmoesearch",
-  "start_urls": ["https://www.ric.moe/"],
+  "start_urls": [
+    {
+      "url": "https://www.ric.moe/",
+      "tags": ["homepage"]
+    },
+    {
+      "url": "https://www.ric.moe/docs/",
+      "tags": ["docs"],
+      "selectors_key": "docs"
+    },
+    {
+      "url": "https://www.ric.moe/blog/",
+      "tags": ["blog"],
+      "selectors_key": "blog"
+    },
+    {
+      "url": "https://www.ric.moe/moments/",
+      "tags": ["moments"],
+      "selectors_key": "moments"
+    },
+    {
+      "url": "https://www.ric.moe/links/",
+      "tags": ["links"],
+      "selectors_key": "links"
+    },
+    {
+      "url": "https://www.ric.moe/about/",
+      "tags": ["about"],
+      "selectors_key": "about"
+    },
+    {
+      "url": "https://www.ric.moe/feedback/",
+      "tags": ["feedback"],
+      "selectors_key": "feedback"
+    }
+  ],
+  "sitemap_urls": ["https://www.ric.moe/sitemap.xml"],
   "rateLimit": 8,
   "maxDepth": 10,
   "selectors": {
@@ -10,25 +46,151 @@
       "last": true
     },
     "lvl1": {
-      "selector": "header h1, article h1"
+      "selector": "header h1, article h1, .hero__title, main h1"
     },
     "lvl2": {
-      "selector": "article h2"
+      "selector": "article h2, main h2"
     },
     "lvl3": {
-      "selector": "article h3"
+      "selector": "article h3, main h3"
     },
     "lvl4": {
-      "selector": "article h4"
+      "selector": "article h4, main h4"
     },
     "lvl5": {
-      "selector": "article h5, article td:first-child"
+      "selector": "article h5, main h5, article td:first-child"
     },
     "lvl6": {
-      "selector": "article h6"
+      "selector": "article h6, main h6"
     },
     "content": {
-      "selector": "article p, article li, article td:last-child"
+      "selector": "article p, article li, article td:last-child, main p, main li, .hero__subtitle, .card__body p"
     }
-  }
+  },
+  "selectors_exclude": [
+    ".navbar",
+    ".footer",
+    ".pagination",
+    ".table-of-contents",
+    ".theme-code-block",
+    "header",
+    "nav",
+    ".admonition-title",
+    ".breadcrumb",
+    ".edit-this-page"
+  ],
+  "custom_settings": {
+    "docs": {
+      "lvl0": {
+        "selector": ".menu__link.menu__link--sublist.menu__link--active, .breadcrumb__item--active .breadcrumb__link",
+        "defaultValue": "Documentation"
+      },
+      "lvl1": {
+        "selector": "article h1, .markdown h1"
+      },
+      "lvl2": {
+        "selector": "article h2, .markdown h2"
+      },
+      "lvl3": {
+        "selector": "article h3, .markdown h3"
+      },
+      "lvl4": {
+        "selector": "article h4, .markdown h4"
+      },
+      "lvl5": {
+        "selector": "article h5, .markdown h5"
+      },
+      "lvl6": {
+        "selector": "article h6, .markdown h6"
+      },
+      "content": {
+        "selector": "article p, article li, .markdown p, .markdown li, .admonition p, .admonition li"
+      }
+    },
+    "blog": {
+      "lvl0": {
+        "selector": ".navbar__item--active, .navbar__link--active",
+        "defaultValue": "Blog"
+      },
+      "lvl1": {
+        "selector": "article h1, .post__title, .markdown h1"
+      },
+      "lvl2": {
+        "selector": "article h2, .markdown h2"
+      },
+      "lvl3": {
+        "selector": "article h3, .markdown h3"
+      },
+      "lvl4": {
+        "selector": "article h4, .markdown h4"
+      },
+      "content": {
+        "selector": "article p, article li, .markdown p, .markdown li, .post__content p, .post__content li"
+      }
+    },
+    "moments": {
+      "lvl0": {
+        "selector": ".navbar__item--active",
+        "defaultValue": "Moments"
+      },
+      "lvl1": {
+        "selector": "main h1, .container h1"
+      },
+      "lvl2": {
+        "selector": "main h2, .container h2, .moment-card h2"
+      },
+      "content": {
+        "selector": "main p, .container p, .moment-card p, .moment-content p, .card__body p"
+      }
+    },
+    "links": {
+      "lvl0": {
+        "selector": ".navbar__item--active",
+        "defaultValue": "Links"
+      },
+      "lvl1": {
+        "selector": "main h1, .container h1"
+      },
+      "lvl2": {
+        "selector": "main h2, .container h2, .card__header .avatar__name"
+      },
+      "content": {
+        "selector": "main p, .container p, .card__body p, .avatar__subtitle"
+      }
+    },
+    "about": {
+      "lvl0": {
+        "selector": ".navbar__item--active",
+        "defaultValue": "About"
+      },
+      "lvl1": {
+        "selector": "main h1, .container h1, article h1"
+      },
+      "lvl2": {
+        "selector": "main h2, .container h2, article h2"
+      },
+      "content": {
+        "selector": "main p, .container p, article p, article li"
+      }
+    },
+    "feedback": {
+      "lvl0": {
+        "selector": ".navbar__item--active",
+        "defaultValue": "Feedback"
+      },
+      "lvl1": {
+        "selector": "main h1, .container h1, article h1"
+      },
+      "lvl2": {
+        "selector": "main h2, .container h2, article h2"
+      },
+      "content": {
+        "selector": "main p, .container p, article p, article li"
+      }
+    }
+  },
+  "js_render": true,
+  "use_anchors": true,
+  "strip_chars": " .,;:§¶",
+  "nb_hits": 46340
 }
