@@ -47,7 +47,7 @@ const features: FeatureProps[] = [
             <>
                 <div className="button-group button-group--block">
                     <button className="button button--primary button--outline" 
-                    onClick={() => window.open('mailto:hello@ric.moe')}>
+                    onClick={() => window.open('mailto:mail@ric.moe')}>
                         Email
                     </button>
                     <button 

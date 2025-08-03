@@ -85,15 +85,76 @@ const config: Config = {
           customCss: './src/css/custom.css',
         },
         sitemap: {
-          // lastmod: 'date',
+          lastmod: 'date',
           changefreq: 'weekly',
           priority: 0.5,
-          ignorePatterns: ['/tags/**'],
+          ignorePatterns: [
+            // 只忽略真正不需要的页面
+            '/search',  // 搜索页面通常不需要索引
+          ],
           filename: 'sitemap.xml',
           createSitemapItems: async (params) => {
             const {defaultCreateSitemapItems, ...rest} = params;
             const items = await defaultCreateSitemapItems(rest);
-            return items.filter((item) => !item.url.includes('/page/'));
+            
+            // 不过滤任何页面，保留所有页面以获得最详细的sitemap
+            return items.map((item) => {
+              // 为不同类型的页面设置不同的优先级和更新频率
+              if (item.url === 'https://www.ric.moe/') {
+                // 首页最高优先级
+                return {
+                  ...item,
+                  priority: 1.0,
+                  changefreq: 'daily'
+                };
+              } else if (item.url.includes('/docs/')) {
+                // 文档页面高优先级
+                return {
+                  ...item,
+                  priority: 0.9,
+                  changefreq: 'weekly'
+                };
+              } else if (item.url.includes('/blog/')) {
+                // 博客页面高优先级，但归档和标签页面稍低
+                if (item.url.includes('/blog/archive') || item.url.includes('/blog/tags') || item.url.includes('/blog/authors')) {
+                  return {
+                    ...item,
+                    priority: 0.6,
+                    changefreq: 'weekly'
+                  };
+                } else {
+                  return {
+                    ...item,
+                    priority: 0.8,
+                    changefreq: 'weekly'
+                  };
+                }
+              } else if (item.url.includes('/moments')) {
+                // Moments页面中等优先级
+                return {
+                  ...item,
+                  priority: 0.7,
+                  changefreq: 'weekly'
+                };
+              } else if (item.url.includes('/links')) {
+                // Links页面中等优先级
+                return {
+                  ...item,
+                  priority: 0.6,
+                  changefreq: 'monthly'
+                };
+              } else if (item.url.includes('/about') || item.url.includes('/feedback')) {
+                // 关于和反馈页面较低优先级
+                return {
+                  ...item,
+                  priority: 0.5,
+                  changefreq: 'monthly'
+                };
+              }
+              
+              // 其他页面使用默认设置
+              return item;
+            });
           },
         },
       } satisfies Preset.Options,

@@ -159,7 +159,7 @@ npm run build -- --locale en-US
 - **代码分割** - 自动按路由分割
 - **图片优化** - 支持 WebP 格式和懒加载
 - **缓存策略** - 静态资源长期缓存
-- **CDN 加速** - GitHub Pages CDN
+- **CDN 加速** - Azure Static Website App
 
 ## 🤝 贡献指南
 
@@ -177,7 +177,7 @@ npm run build -- --locale en-US
 
 ## 🔗 相关链接
 
-- **在线预览**: [https://ricmoe.github.io/ricmoe-docusaurus/](https://ricmoe.github.io/ricmoe-docusaurus/)
+- **在线预览**: [RICMOE](https://www.ric.moe)
 - **项目仓库**: [https://github.com/RichardMiku/ricmoe-docusaurus](https://github.com/RichardMiku/ricmoe-docusaurus)
 - **问题反馈**: [GitHub Issues](https://github.com/RichardMiku/ricmoe-docusaurus/issues)
 - **功能建议**: [GitHub Discussions](https://github.com/RichardMiku/ricmoe-docusaurus/discussions)
@@ -185,8 +185,8 @@ npm run build -- --locale en-US
 ## 📞 联系方式
 
 - **作者**: RichardMiku
-- **邮箱**: [your-email@example.com]
-- **博客**: [https://ric.moe](https://ric.moe)
+- **邮箱**: [mail@ric.moe]
+- **主页**: [https://www.ric.moe](https://www.ric.moe)
 
 ---
 

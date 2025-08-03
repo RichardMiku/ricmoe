@@ -9,12 +9,15 @@ new Crawler({
     "https://www.ric.moe",
     "https://www.ric.moe/docs/intro",
     "https://www.ric.moe/blog",
+    "https://www.ric.moe/blog/archive",
+    "https://www.ric.moe/blog/tags",
     "https://www.ric.moe/moments/",
     "https://www.ric.moe/links/",
     "https://www.ric.moe/about/",
-    "https://www.ric.moe/feedback/"
+    "https://www.ric.moe/feedback/",
+    "https://www.ric.moe/search"
   ],
-  renderJavaScript: true, // 启用JavaScript渲染以确保React页面被正确索引
+  renderJavaScript: false, // 禁用JavaScript渲染以符合计划限制
   sitemaps: ["https://www.ric.moe/sitemap.xml"],
   ignoreCanonicalTo: true,
   discoveryPatterns: ["https://www.ric.moe/**"],
@@ -51,7 +54,6 @@ new Crawler({
           },
           aggregateContent: true,
           recordVersion: "v3",
-          exclusiveSelectors: true,
         });
       },
     },
@@ -68,21 +70,46 @@ new Crawler({
             },
             lvl1: [
               "header h1", 
-              "article h1", 
+              "article h1",
               ".theme-blog-post-paginator__title",
-              ".blog-post-item h2"
+              ".blog-post-item h2",
+              "h1",
+              "h2 a"
             ],
-            lvl2: ["article h2", ".theme-blog-post-paginator h2"],
-            lvl3: ["article h3", ".theme-blog-post-paginator h3"],
-            lvl4: ["article h4", ".theme-blog-post-paginator h4"],
-            lvl5: ["article h5", ".theme-blog-post-paginator h5"],
-            lvl6: ["article h6", ".theme-blog-post-paginator h6"],
+            lvl2: [
+              "article h2", 
+              ".theme-blog-post-paginator h2",
+              "h2",
+              "h3"
+            ],
+            lvl3: [
+              "article h3", 
+              ".theme-blog-post-paginator h3",
+              "h3",
+              "h4"
+            ],
+            lvl4: [
+              "article h4", 
+              ".theme-blog-post-paginator h4",
+              "h4"
+            ],
+            lvl5: ["article h5", ".theme-blog-post-paginator h5", "h5"],
+            lvl6: ["article h6", ".theme-blog-post-paginator h6", "h6"],
             content: [
-              "article p", 
+              "article p",
               "article li",
               ".theme-blog-post-paginator p",
               ".theme-blog-post-paginator li",
-              ".blog-post-item p"
+              ".blog-post-item p",
+              ".markdown p",
+              ".markdown li",
+              ".container p",
+              ".container li",
+              // 通用选择器作为后备
+              "p",
+              "li",
+              "time",
+              "small"
             ],
           },
           aggregateContent: true,
@@ -101,20 +128,42 @@ new Crawler({
               selectors: "",
               defaultValue: "Moments",
             },
-            lvl1: ["header h1", ".hero__title", "main h1"],
-            lvl2: ["main h2", ".card__header h2", ".moments-category-title"],
-            lvl3: ["main h3", ".card__header h3", ".moment-item h3"],
-            lvl4: ["main h4", ".card__header h4"],
-            lvl5: ["main h5", ".card__header h5"],
-            lvl6: ["main h6", ".card__header h6"],
+            lvl1: [
+              "header .hero__title", 
+              ".hero .hero__title",
+              "h1",
+              "main h1"
+            ],
+            lvl2: [
+              "header .hero__subtitle",
+              ".hero p",
+              "main h2",
+              "h2"
+            ],
+            lvl3: [
+              ".card__header h3",
+              "main h3", 
+              "h3"
+            ],
+            lvl4: [".card__body h4", "main h4", "h4"],
+            lvl5: [".card__body h5", "main h5", "h5"],
+            lvl6: [".card__body h6", "main h6", "h6"],
             content: [
-              "main p", 
-              "main li",
+              ".hero p",
               ".card__body p",
               ".card__body li",
-              ".moment-content",
-              ".moment-description",
-              ".container p"
+              ".card__footer small",
+              "main p",
+              "main li",
+              ".container p",
+              ".container li",
+              // 通用选择器作为后备
+              "p",
+              "li",
+              "button",
+              "label",
+              "small",
+              "strong"
             ],
           },
           aggregateContent: true,
@@ -133,19 +182,38 @@ new Crawler({
               selectors: "",
               defaultValue: "Links",
             },
-            lvl1: ["header h1", ".hero__title", "main h1"],
-            lvl2: ["main h2", ".card__header h2"],
-            lvl3: ["main h3", ".avatar__name", ".card__header h3"],
-            lvl4: ["main h4", ".card__header h4"],
-            lvl5: ["main h5", ".card__header h5"],
-            lvl6: ["main h6", ".card__header h6"],
+            lvl1: [
+              "header .hero__title", 
+              ".hero .hero__title",
+              "h1"
+            ],
+            lvl2: [
+              "header .hero__subtitle",
+              ".hero .hero__subtitle",
+              "h2"
+            ],
+            lvl3: [
+              ".avatar__name",
+              ".card__header .avatar__name",
+              "h3"
+            ],
+            lvl4: ["h4"],
+            lvl5: ["h5"],
+            lvl6: ["h6"],
             content: [
-              "main p", 
-              "main li",
-              ".card__body p",
+              ".hero .hero__subtitle",
               ".avatar__subtitle",
-              ".card__footer p",
-              ".container p"
+              ".card__header .avatar__subtitle",
+              ".card__footer button a",
+              ".button",
+              // 通用选择器作为后备
+              ".container p",
+              ".container li",
+              "p",
+              "li",
+              "small",
+              "button",
+              "a"
             ],
           },
           aggregateContent: true,
@@ -226,18 +294,44 @@ new Crawler({
               selectors: "",
               defaultValue: "Home",
             },
-            lvl1: ["header h1", ".hero__title", "main h1"],
-            lvl2: ["main h2", ".hero__subtitle", ".features h2"],
-            lvl3: ["main h3", ".feature h3"],
-            lvl4: ["main h4", ".feature h4"],
-            lvl5: ["main h5", ".feature h5"],
-            lvl6: ["main h6", ".feature h6"],
+            lvl1: [
+              ".hero__title",
+              "header h1",
+              "main h1",
+              "h1"
+            ],
+            lvl2: [
+              ".hero__subtitle",
+              ".card__header h2",
+              "main h2",
+              "h2"
+            ],
+            lvl3: [
+              ".card__header h3",
+              "main h3",
+              "h3"
+            ],
+            lvl4: [
+              ".card__body h4",
+              "main h4",
+              "h4"
+            ],
+            lvl5: ["main h5", "h5"],
+            lvl6: ["main h6", "h6"],
             content: [
-              "main p", 
+              ".hero__subtitle",
+              ".card__body p",
+              ".card__body li",
+              ".card__footer p",
+              "main p",
               "main li",
-              ".hero p",
-              ".feature p",
-              ".container p"
+              ".container p",
+              ".container li",
+              // 通用选择器作为后备
+              "p",
+              "li",
+              "button",
+              "span"
             ],
           },
           aggregateContent: true,
@@ -258,9 +352,7 @@ new Crawler({
         "lang", 
         "language",
         "version",
-        "docusaurus_tag",
-        "hierarchy.lvl0", // 添加层级faceting支持
-        "hierarchy.lvl1"
+        "docusaurus_tag"
       ],
       attributesToRetrieve: [
         "hierarchy",
@@ -268,8 +360,7 @@ new Crawler({
         "anchor",
         "url",
         "url_without_anchor",
-        "type",
-        "objectID" // 添加objectID用于去重
+        "type"
       ],
       attributesToHighlight: [
         "hierarchy.lvl0",
@@ -319,15 +410,6 @@ new Crawler({
       advancedSyntax: true,
       attributeCriteriaComputedByMinProximity: true,
       removeWordsIfNoResults: "allOptional",
-      // 添加同义词支持
-      synonyms: [
-        ["moments", "动态", "时刻"],
-        ["links", "友链", "链接"],
-        ["about", "关于", "介绍"],
-        ["feedback", "反馈", "留言"],
-        ["blog", "博客", "文章"],
-        ["docs", "文档", "说明"]
-      ]
     },
   },
   apiKey: "",
