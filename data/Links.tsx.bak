@@ -1,0 +1,248 @@
+import { ReactNode } from "react";
+
+export const LinksTagsSwitch : boolean = true;
+
+export const links: LinksProps[] = [
+    {
+        name: "Newbe36524",
+        description: "Now, everyone will be excellent!",
+        avatarUrl: "/img/Links/friends/newbe36524.svg",
+        url: "https://newbe.pro",
+        tags: ["friends"],
+        category: "friends",
+        addedDate: "2024-01-15",
+        status: "active"
+    },
+    {
+        name:"New Year Countdown",
+        description: "A simple countdown to the new year.",
+        avatarUrl: "https://images.unsplash.com/photo-1467810563316-b5476525c0f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1349&q=80",
+        url: "https://new.ricpro.link",
+        tags: ["toys", "countdown"],
+        category: "toys",
+        addedDate: "2024-02-01",
+        status: "active"
+    },
+    {
+        name: "Docusaurus",
+        description: "一个用于轻松构建、部署和维护开源项目网站的静态站点生成器。",
+        avatarUrl: "/img/docusaurus.png",
+        url: "https://docusaurus.io/",
+        tags: ["tools", "documentation"],
+        category: "tools", 
+        addedDate: "2024-01-10",
+        status: "active"
+    },
+    {
+        name: "GitHub",
+        description: "全球最大的代码托管平台和开发者社区。",
+        avatarUrl: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+        url: "https://github.com",
+        tags: ["tools", "development"],
+        category: "tools",
+        addedDate: "2024-01-05",
+        status: "active"
+    },
+    {
+        name: "MDN Web Docs",
+        description: "Mozilla 维护的 Web 开发文档和学习资源。",
+        avatarUrl: "https://developer.mozilla.org/favicon-48x48.cbbd161b5b.png",
+        url: "https://developer.mozilla.org",
+        tags: ["tools", "documentation", "learning"],
+        category: "resources",
+        addedDate: "2024-01-12",
+        status: "active"
+    },
+    {
+        name: "VS Code",
+        description: "强大的现代代码编辑器，支持丰富的扩展生态。",
+        avatarUrl: "https://code.visualstudio.com/favicon.ico",
+        url: "https://code.visualstudio.com",
+        tags: ["tools", "editor"],
+        category: "tools",
+        addedDate: "2024-01-08",
+        status: "active"
+    }
+]
+
+export type LinksProps = {
+    name: string;
+    description: string;
+    avatarUrl: string;
+    url: string;
+    imageUrl?: string;
+    tags?: string[];
+    category: string;
+    addedDate: string;
+    status: 'active' | 'inactive' | 'archived';
+    rating?: number; // 1-5 stars
+    author?: string; // who added this link
+};
+
+export type LinksTagProps = {
+    tagId: string;
+    tagName: string | ReactNode;
+    tagDescription: string | ReactNode;
+    color?: string;
+    icon?: string;
+};
+
+export type LinksCategoryProps = {
+    id: string;
+    name: string;
+    description: string;
+    icon: string;
+    color: string;
+};
+
+export const linkCategories: LinksCategoryProps[] = [
+    {
+        id: "friends",
+        name: "朋友们",
+        description: "我的朋友们的网站和博客",
+        icon: "👥",
+        color: "#ff6b6b"
+    },
+    {
+        id: "tools",
+        name: "开发工具",
+        description: "实用的开发工具和服务",
+        icon: "🛠️",
+        color: "#4ecdc4"
+    },
+    {
+        id: "resources",
+        name: "学习资源",
+        description: "优质的学习和参考资料",
+        icon: "📚",
+        color: "#45b7d1"
+    },
+    {
+        id: "toys",
+        name: "有趣项目",
+        description: "有趣的小项目和创意作品",
+        icon: "🎮",
+        color: "#96ceb4"
+    }
+];
+
+export const linkTags: LinksTagProps[] = [
+    {
+        tagId: "friends",
+        tagName: "🪶Friends",
+        tagDescription: "Links of Friends",
+        color: "#ff6b6b",
+        icon: "👥"
+    },
+    {
+        tagId: "tools",
+        tagName: "🛠️Tools",
+        tagDescription: "Development Tools",
+        color: "#4ecdc4",
+        icon: "🛠️"
+    },
+    {
+        tagId: "toys",
+        tagName: "🎮Toys",
+        tagDescription: "Fun Projects",
+        color: "#96ceb4",
+        icon: "🎮"
+    },
+    {
+        tagId: "documentation",
+        tagName: "📖Documentation",
+        tagDescription: "Documentation and Guides",
+        color: "#feca57",
+        icon: "📖"
+    },
+    {
+        tagId: "learning",
+        tagName: "🎓Learning",
+        tagDescription: "Learning Resources",
+        color: "#45b7d1",
+        icon: "🎓"
+    },
+    {
+        tagId: "development",
+        tagName: "�Development",
+        tagDescription: "Development Related",
+        color: "#6c5ce7",
+        icon: "💻"
+    }
+]
+
+// 工具函数：按分类过滤链接
+export const getLinksByCategory = (category: string) => {
+    if (category === 'all') {
+        return links;
+    }
+    return links.filter(link => link.category === category);
+};
+
+// 工具函数：按标签过滤链接
+export const getLinksByTag = (tag: string) => {
+    return links.filter(link => 
+        link.tags && link.tags.includes(tag)
+    );
+};
+
+// 工具函数：按状态过滤链接
+export const getLinksByStatus = (status: string) => {
+    if (status === 'all') {
+        return links;
+    }
+    return links.filter(link => link.status === status);
+};
+
+// 工具函数：按日期排序链接
+export const sortLinksByDate = (links: LinksProps[], order: 'asc' | 'desc' = 'desc') => {
+    return [...links].sort((a, b) => {
+        const dateA = new Date(a.addedDate).getTime();
+        const dateB = new Date(b.addedDate).getTime();
+        return order === 'desc' ? dateB - dateA : dateA - dateB;
+    });
+};
+
+// 工具函数：按名称排序链接
+export const sortLinksByName = (links: LinksProps[], order: 'asc' | 'desc' = 'asc') => {
+    return [...links].sort((a, b) => {
+        return order === 'asc' 
+            ? a.name.localeCompare(b.name)
+            : b.name.localeCompare(a.name);
+    });
+};
+
+// 工具函数：获取分类统计信息
+export const getCategoryStats = () => {
+    return linkCategories.map(category => ({
+        ...category,
+        count: getLinksByCategory(category.id).length,
+        percentage: ((getLinksByCategory(category.id).length / links.length) * 100).toFixed(1)
+    }));
+};
+
+// 工具函数：获取标签统计信息
+export const getTagStats = () => {
+    const tagMap = new Map<string, number>();
+    links.forEach(link => {
+        if (link.tags) {
+            link.tags.forEach(tag => {
+                tagMap.set(tag, (tagMap.get(tag) || 0) + 1);
+            });
+        }
+    });
+    
+    return Array.from(tagMap.entries())
+        .map(([tag, count]) => ({ tag, count }))
+        .sort((a, b) => b.count - a.count);
+};
+
+// 工具函数：获取分类配置
+export const getCategoryConfig = (categoryId: string) => {
+    return linkCategories.find(category => category.id === categoryId);
+};
+
+// 工具函数：获取标签配置
+export const getTagConfig = (tagId: string) => {
+    return linkTags.find(tag => tag.tagId === tagId);
+};

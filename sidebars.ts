@@ -43,6 +43,22 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: '🔗 Links 链接系统',
+          link: {
+            type: 'doc',
+            id: 'ricmoe-theme/links/README'
+          },
+          items: [
+            'ricmoe-theme/links/quick-start',
+            'ricmoe-theme/links/data-structure',
+            'ricmoe-theme/links/api-reference',
+            'ricmoe-theme/links/components',
+            'ricmoe-theme/links/configuration',
+            'ricmoe-theme/links/best-practices'
+          ]
+        },
+        {
+          type: 'category',
           label: '💬 微信集成',
           link: {
             type: 'doc',
