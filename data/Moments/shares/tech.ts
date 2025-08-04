@@ -5,7 +5,7 @@ import { handleLike, handleComment, handleShare } from '../actions';
 export const techMoments: MomentProps[] = [
     {
         title: "学习新技术",
-        content: "最近在学习 React 和 TypeScript，感觉收获很多。编程真的是一个不断学习的过程。",
+        content: "最近在学习 React 和 TypeScript，使用React就像在拼积木。",
         date: "2025-07-25",
         author: "ricmoe",
         style: 'feed',

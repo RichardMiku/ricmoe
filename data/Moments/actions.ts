@@ -44,7 +44,7 @@ export const handleShare = (momentTitle: string, url?: string) => {
 
 // 访问博客
 export const handleVisitBlog = () => {
-    window.location.href = '/';
+    window.location.href = '/blog';
 };
 
 // 了解更多

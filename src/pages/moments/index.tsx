@@ -387,8 +387,8 @@ export default function MomentsPage() : ReactNode {
                     variants={variants}
                     initial="hidden"
                     animate="visible">
-                        <h1 className="hero__title">📷️Moments（Developing）</h1>
-                        <p>💖Record and Share Life Moments.💖（🚧施工中，敬请期待🚧）</p>
+                        <h1 className="hero__title">📷️Moments</h1>
+                        <p>💖Record and Share Life Moments.💖</p>
                     {/* <div className='row'>
                         <div className="col col--5">
                             <h1 className="hero__title">📷️Moments（Developing）</h1>

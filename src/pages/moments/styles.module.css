@@ -59,7 +59,7 @@
 .minimalCard {
   border: none;
   box-shadow: none !important;
-  background: var(--ifm-color-emphasis-100);
+  /* background: var(--ifm-color-emphasis-100); */
   border-radius: 12px;
   padding: 1rem;
 }
