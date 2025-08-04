@@ -182,7 +182,7 @@ export default function FeedbackPage() {
   };
 
   return (
-    <Layout title='Feedback' description='RICMOE Feedback page'>
+    <Layout title='Feedback' description='Please leave your valuable feedback.'>
       <div className={styles.feedbackContainer}>
         <div className={styles.feedbackFormWrapper}>
           <div className={clsx(styles.feedbackForm, "shadow--md")}>

@@ -7,10 +7,24 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
+import Head from '@docusaurus/Head';
 
 import styles from './index.module.css';
 import TypeEffectSubtitle from '../components/TypeEffectSubtitle';
 import { useThemeConfig } from '@docusaurus/theme-common';
+
+// Extend the Docusaurus ThemeConfig type to include our custom subtitleConfig
+interface ExtendedThemeConfig {
+  subtitleConfig?: {
+    effect: boolean;
+    loop: boolean;
+    source: number;
+    sub?: string[];
+    startDelay: number;
+    typeSpeed: number;
+    backSpeed: number;
+  };
+}
 
 const variants: Variants = {
   visible: i => ({
@@ -29,7 +43,7 @@ const variants: Variants = {
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
-  const themeConfig = useThemeConfig();
+  const themeConfig = useThemeConfig() as ExtendedThemeConfig;
   return (
     <header className={clsx(styles.heroBanner)}>
       <div className="container">
@@ -66,7 +80,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title={`Hello`}
-      description="Description will go into a meta tag in <head />">
+      description={siteConfig.tagline}>
       <HomepageHeader />
       <main>
         <HomepageFeatures />

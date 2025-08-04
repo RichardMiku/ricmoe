@@ -380,7 +380,7 @@ function MomentCard({ title, content, date, author, location, style = 'simple', 
 
 export default function MomentsPage() : ReactNode {
     return (
-        <Layout title="Moments" description="Moments">
+        <Layout title="Moments" description="💖Record and Share Life Moments.💖">
             <header className="hero">
                 <motion.div className="container"
                     custom={0}

@@ -7,7 +7,7 @@ import { tr } from 'framer-motion/client';
 
 const config: Config = {
   title: 'RICMOE',
-  tagline: 'main page subtitle',
+  tagline: 'Explore, Share, and Enjoy!',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future

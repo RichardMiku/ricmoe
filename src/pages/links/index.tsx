@@ -444,7 +444,7 @@ function LinksPageHeader(): ReactNode {
                 initial="hidden"
                 animate="visible"
             >
-                <h1 className="hero__title">🔗 Links</h1>
+                <h1 className="hero__title">🔗Links</h1>
                 <p className="hero__subtitle">
                     Friends, Useful Tools and Premium Resources 💫
                 </p>
@@ -469,7 +469,7 @@ function LinksPageHeader(): ReactNode {
 
 export default function LinksPage(): ReactNode {
     return (
-        <Layout title="友情链接" description="朋友们的网站、实用工具和优质资源">
+        <Layout title="Links" description="Friends, Useful Tools and Premium Resources 💫">
             <LinksPageHeader />
             <LinksPageContent />
         </Layout>
