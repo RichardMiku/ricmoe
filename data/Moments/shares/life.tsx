@@ -3,6 +3,18 @@ import { handleLike, handleShare } from '../actions';
 
 // 生活相关的时刻分享
 export const lifeMoments: MomentProps[] = [
+    {
+        title: "真男人开v8",
+        content: (
+            <>
+                🎉特别鸣谢 <a href='https://v.douyin.com/D4iot64VrWo/' target='_blank'>@小松啊</a>
+            </>
+        ),
+        date: "2025-08-09",
+        author: "ricmoe",
+        style: 'photo-centric',
+        image: "/moments/life/photo_2025-08-08_22-58-36.jpg",
+    },
     // {
     //     title: "美丽的日落",
     //     content: "今天看到了特别美丽的日落，忍不住想要分享给大家。大自然的美总是让人心情愉悦。",
