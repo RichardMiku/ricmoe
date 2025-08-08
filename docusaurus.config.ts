@@ -163,6 +163,13 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
+    announcementBar: {
+      id: 'announcement-bar',
+      content: '欢迎来到 RICMOE！Moments卡片上的按钮暂不可用，评论请前往详情页。',
+      // backgroundColor: '#fafbfc', // Defaults to `#fafbfc`
+      textColor: '#495263ff', // Defaults to `#091E42`
+      isCloseable: false, // Defaults to `true`
+    },
     image: 'img/docusaurus-social-card.jpg',
     metadata: [
       {name: 'keywords', content: 'RICMOE, Docusaurus, documentation'},
