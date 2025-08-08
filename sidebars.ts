@@ -49,6 +49,7 @@ const sidebars: SidebarsConfig = {
             id: 'ricmoe-theme/links/README'
           },
           items: [
+            'ricmoe-theme/links/overview',
             'ricmoe-theme/links/quick-start',
             'ricmoe-theme/links/data-structure',
             'ricmoe-theme/links/api-reference',
@@ -93,6 +94,30 @@ const sidebars: SidebarsConfig = {
             'ricmoe-theme/development/architecture',
             'ricmoe-theme/development/build-config',
             'ricmoe-theme/development/deployment'
+          ]
+        },
+        {
+          type: 'category',
+          label: '⚙️ 配置和扩展',
+          items: [
+            'ricmoe-theme/configuration',
+            'ricmoe-theme/plugins-extensions'
+          ]
+        },
+        {
+          type: 'category',
+          label: '🚀 部署和运维',
+          items: [
+            'ricmoe-theme/deployment-ops',
+            'ricmoe-theme/troubleshooting'
+          ]
+        },
+        {
+          type: 'category',
+          label: '📚 参考资料',
+          items: [
+            'ricmoe-theme/api-reference',
+            'ricmoe-theme/changelog'
           ]
         }
       ]
