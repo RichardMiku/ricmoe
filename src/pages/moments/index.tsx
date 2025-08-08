@@ -1,5 +1,6 @@
 import React, { ReactNode, useState, useMemo, useEffect } from 'react';
 import Layout from "@theme/Layout";
+import Head from '@docusaurus/Head';
 import styles from './styles.module.css';
 import moments, { 
     MomentProps, 
@@ -556,12 +557,160 @@ function MomentCard({ id, title, content, date, author, location, style = 'simpl
 export default function MomentsPage() : ReactNode {
     // 调试：在控制台输出 moments 数据以检查 ID 生成情况
     React.useEffect(() => {
-        console.log('Moments data with IDs:', moments);
-        console.log('First moment:', moments[0]);
+        // console.log('Moments data with IDs:', moments);
+        // console.log('First moment:', moments[0]);
     }, []);
     
+    // 获取 URL 中的 moment ID 用于 SEO
+    const [currentMoment, setCurrentMoment] = React.useState<MomentProps | null>(null);
+    
+    React.useEffect(() => {
+        // 检查 URL 参数
+        const urlParams = new URLSearchParams(window.location.search);
+        const momentId = urlParams.get('id');
+        
+        if (momentId) {
+            const moment = getMomentById(momentId);
+            setCurrentMoment(moment || null);
+        } else {
+            setCurrentMoment(null);
+        }
+        
+        // 监听 URL 变化
+        const handlePopState = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const momentId = urlParams.get('id');
+            
+            if (momentId) {
+                const moment = getMomentById(momentId);
+                setCurrentMoment(moment || null);
+            } else {
+                setCurrentMoment(null);
+            }
+        };
+        
+        window.addEventListener('popstate', handlePopState);
+        
+        return () => {
+            window.removeEventListener('popstate', handlePopState);
+        };
+    }, []);
+    
+    // 动态设置页面的 title 和 description
+    const pageTitle = currentMoment ? `${currentMoment.title} - Moments` : "Moments";
+    const pageDescription = currentMoment 
+        ? (typeof currentMoment.content === 'string' 
+            ? currentMoment.content.substring(0, 160) + (currentMoment.content.length > 160 ? '...' : '')
+            : `${currentMoment.title} - ${currentMoment.date}`)
+        : "💖Record and Share Life Moments.💖";
+    
+    // 为详情页面添加更多 meta 标签
+    const additionalMetadata = currentMoment ? [
+        {
+            name: 'author',
+            content: currentMoment.author
+        },
+        {
+            name: 'publish_date', 
+            content: currentMoment.date
+        },
+        {
+            property: 'og:title',
+            content: currentMoment.title
+        },
+        {
+            property: 'og:description',
+            content: typeof currentMoment.content === 'string' 
+                ? currentMoment.content.substring(0, 200) 
+                : currentMoment.title
+        },
+        {
+            property: 'og:type',
+            content: 'article'
+        },
+        {
+            property: 'og:url',
+            content: typeof window !== 'undefined' ? window.location.href : ''
+        },
+        ...(currentMoment.image ? [{
+            property: 'og:image',
+            content: currentMoment.image
+        }] : []),
+        {
+            name: 'twitter:card',
+            content: currentMoment.image ? 'summary_large_image' : 'summary'
+        },
+        {
+            name: 'twitter:title',
+            content: currentMoment.title
+        },
+        {
+            name: 'twitter:description',
+            content: typeof currentMoment.content === 'string' 
+                ? currentMoment.content.substring(0, 200) 
+                : currentMoment.title
+        },
+        ...(currentMoment.image ? [{
+            name: 'twitter:image',
+            content: currentMoment.image
+        }] : [])
+    ] : [];
+    
     return (
-        <Layout title="Moments" description="💖Record and Share Life Moments.💖">
+        <Layout 
+            title={pageTitle} 
+            description={pageDescription}
+            wrapperClassName={currentMoment ? 'moment-detail-page' : 'moments-list-page'}
+        >
+            {/* 添加额外的 meta 标签 */}
+            <Head>
+                {additionalMetadata.map((meta, index) => (
+                    <meta key={index} {...meta} />
+                ))}
+                {currentMoment && (
+                    <>
+                        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.href : ''} />
+                        <meta name="robots" content="index,follow" />
+                        <meta name="googlebot" content="index,follow" />
+                        
+                        {/* 添加结构化数据 (JSON-LD) */}
+                        <script type="application/ld+json">
+                            {JSON.stringify({
+                                "@context": "https://schema.org",
+                                "@type": "BlogPosting",
+                                "headline": currentMoment.title,
+                                "description": typeof currentMoment.content === 'string' 
+                                    ? currentMoment.content 
+                                    : currentMoment.title,
+                                "author": {
+                                    "@type": "Person",
+                                    "name": currentMoment.author
+                                },
+                                "datePublished": currentMoment.date,
+                                "dateModified": currentMoment.date,
+                                "publisher": {
+                                    "@type": "Organization",
+                                    "name": "RICMOE",
+                                    "logo": {
+                                        "@type": "ImageObject",
+                                        "url": "https://www.ric.moe/img/logo.png"
+                                    }
+                                },
+                                "mainEntityOfPage": {
+                                    "@type": "WebPage",
+                                    "@id": typeof window !== 'undefined' ? window.location.href : ''
+                                },
+                                ...(currentMoment.image && {
+                                    "image": currentMoment.image
+                                }),
+                                ...(currentMoment.tags && {
+                                    "keywords": currentMoment.tags.join(", ")
+                                })
+                            })}
+                        </script>
+                    </>
+                )}
+            </Head>
             <header className="hero">
                 <motion.div className="container"
                     custom={0}

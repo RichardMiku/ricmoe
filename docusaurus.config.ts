@@ -97,22 +97,38 @@ const config: Config = {
             const {defaultCreateSitemapItems, ...rest} = params;
             const items = await defaultCreateSitemapItems(rest);
             
-            // 不过滤任何页面，保留所有页面以获得最详细的sitemap
-            return items.map((item) => {
+            // 动态添加 moments 详情页面到 sitemap
+            const momentsData = await import('./data/Moments/index.js');
+            const moments = momentsData.default;
+            
+            const momentDetailItems = moments
+              .filter(moment => moment.id) // 只包含有 ID 的 moments
+              .map(moment => ({
+                url: `https://www.ric.moe/moments?id=${moment.id}`,
+                lastmod: moment.date,
+                changefreq: 'monthly' as const,
+                priority: 0.6
+              }));
+            
+            // 合并默认页面和动态 moments 页面
+            const allItems = [...items, ...momentDetailItems];
+            
+            // 为不同类型的页面设置不同的优先级和更新频率
+            return allItems.map((item) => {
               // 为不同类型的页面设置不同的优先级和更新频率
               if (item.url === 'https://www.ric.moe/') {
                 // 首页最高优先级
                 return {
                   ...item,
                   priority: 1.0,
-                  changefreq: 'daily'
+                  changefreq: 'daily' as const
                 };
               } else if (item.url.includes('/docs/')) {
                 // 文档页面高优先级
                 return {
                   ...item,
                   priority: 0.9,
-                  changefreq: 'weekly'
+                  changefreq: 'weekly' as const
                 };
               } else if (item.url.includes('/blog/')) {
                 // 博客页面高优先级，但归档和标签页面稍低
@@ -120,13 +136,13 @@ const config: Config = {
                   return {
                     ...item,
                     priority: 0.6,
-                    changefreq: 'weekly'
+                    changefreq: 'weekly' as const
                   };
                 } else {
                   return {
                     ...item,
                     priority: 0.8,
-                    changefreq: 'weekly'
+                    changefreq: 'weekly' as const
                   };
                 }
               } else if (item.url.includes('/moments')) {
@@ -134,21 +150,21 @@ const config: Config = {
                 return {
                   ...item,
                   priority: 0.7,
-                  changefreq: 'weekly'
+                  changefreq: 'weekly' as const
                 };
               } else if (item.url.includes('/links')) {
                 // Links页面中等优先级
                 return {
                   ...item,
                   priority: 0.6,
-                  changefreq: 'monthly'
+                  changefreq: 'monthly' as const
                 };
               } else if (item.url.includes('/about') || item.url.includes('/feedback')) {
                 // 关于和反馈页面较低优先级
                 return {
                   ...item,
                   priority: 0.5,
-                  changefreq: 'monthly'
+                  changefreq: 'monthly' as const
                 };
               }
               
