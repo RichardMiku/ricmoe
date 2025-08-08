@@ -33,3 +33,17 @@ wx.ready(function() {
   wx.updateAppMessageShareData(shareData);
   wx.updateTimelineShareData(shareData);
 });
+
+function refreshShareData() {
+  wx.ready(function() {
+    var shareData = {
+      title: document.title,
+      desc: document.querySelector('meta[name="description"]').getAttribute('content'),
+      link:  window.location.href.split('#')[0],
+      imgUrl: 'https://www.ric.moe/img/logo.png',
+    };
+    console.log('wx.ready', shareData);
+    wx.updateAppMessageShareData(shareData);
+    wx.updateTimelineShareData(shareData);
+  });
+}

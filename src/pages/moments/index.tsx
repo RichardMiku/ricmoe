@@ -180,8 +180,11 @@ function MomentsPageContent() : ReactNode {
           >
             🔗 复制链接
           </button>
+          <button className='button button--outline button--secondary'
+          onClick={()=>{refreshShareData()}}>
+            🔄Refresh ShareData
+          </button>
         </div>
-
         {/* 评论区 */}
         <CommentsSection 
           path={`/moments?id=${momentId}`} // 请替换为你的 Waline 服务器地址
