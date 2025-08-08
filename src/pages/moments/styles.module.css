@@ -26,6 +26,26 @@
   align-items: flex-end;
 }
 
+.dateAndDetails {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.viewDetailText {
+  color: var(--ifm-color-primary);
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+  font-weight: 500;
+}
+
+.viewDetailText:hover {
+  color: var(--ifm-color-primary-dark);
+  text-decoration: underline;
+}
+
 .authorInfo {
   text-align: right;
 }
@@ -307,6 +327,59 @@
   gap: 0.5rem;
 }
 
+/* Moment Detail Styles */
+.momentDetail {
+  max-width: 630px; /* 约35个汉字的宽度 (18px per character) */
+  margin: 0 auto;
+  width: 100%;
+}
+
+.momentDetail .card {
+  border: none;
+  box-shadow: var(--ifm-global-shadow-md); /* 使用 md 阴影 */
+  width: 100%;
+}
+
+.momentDetail .card__header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.momentDetail .card__body {
+  padding: 2rem 1.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.momentDetail .card__body h2 {
+  margin-bottom: 1rem;
+  color: var(--ifm-color-emphasis-900);
+  line-height: 1.4;
+}
+
+.momentContent {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--ifm-color-emphasis-800);
+  text-align: justify; /* 两端对齐，更适合中文阅读 */
+}
+
+.momentContent p {
+  margin-bottom: 1rem;
+}
+
+.backButton {
+  margin-bottom: 1rem;
+}
+
+.shareActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
 /* 响应式统计卡片 */
 @media (max-width: 576px) {
   .statsGrid {
@@ -320,5 +393,19 @@
   
   .statIcon {
     margin-bottom: 0.5rem;
+  }
+
+  .momentDetail {
+    max-width: 100%;
+    margin: 0 1rem;
+  }
+
+  .momentDetail .card__body {
+    padding: 1.5rem 1rem;
+  }
+
+  .momentContent {
+    font-size: 1rem;
+    line-height: 1.6;
   }
 } 

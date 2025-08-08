@@ -2,12 +2,31 @@ import { MomentProps } from './types';
 import { getAllCategoryIds, getCategoryConfig, getAllCategories } from './categories';
 import { CATEGORY_MOMENTS_MAP, getMomentsByCategoryId, getAllCategoryMoments, validateCategories } from './shares';
 
+// 生成唯一 ID 的函数
+const generateMomentId = (moment: MomentProps, index: number): string => {
+    // 基于标题、日期和索引生成简单的唯一ID
+    const baseString = `${moment.title}-${moment.date}-${index}`;
+    return baseString.toLowerCase()
+        .replace(/[^a-z0-9\-]/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+};
+
 // 动态合并所有时刻数据
 const getAllMoments = (): MomentProps[] => {
     const allMoments: MomentProps[] = [];
+    let globalIndex = 0;
+    
     getAllCategoryIds().forEach(categoryId => {
         const categoryMoments = getMomentsByCategoryId(categoryId);
-        allMoments.push(...categoryMoments);
+        categoryMoments.forEach(moment => {
+            // 如果没有ID，生成一个
+            if (!moment.id) {
+                moment.id = generateMomentId(moment, globalIndex);
+            }
+            allMoments.push(moment);
+            globalIndex++;
+        });
     });
     return allMoments;
 };
@@ -30,6 +49,11 @@ export const testMoments = getMomentsByCategoryId('test');
 
 // 默认导出所有时刻
 export default moments;
+
+// 新增：根据 ID 获取特定时刻
+export const getMomentById = (id: string): MomentProps | undefined => {
+    return moments.find(moment => moment.id === id);
+};
 
 // 工具函数：按日期排序时刻
 export const sortMomentsByDate = (moments: MomentProps[]) => {

@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 export type MomentProps = {
+    id?: string; // 唯一标识符
     title: string;
     content: string | ReactNode;
     date: string;

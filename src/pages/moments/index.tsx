@@ -1,4 +1,4 @@
-import React, { ReactNode, useState, useMemo } from 'react';
+import React, { ReactNode, useState, useMemo, useEffect } from 'react';
 import Layout from "@theme/Layout";
 import styles from './styles.module.css';
 import moments, { 
@@ -16,6 +16,22 @@ import moments, {
     getAllTagsWithStats
 } from '@site/data/Moments';
 import { type Variants, motion } from 'framer-motion';
+import CommentsSection from '@site/src/components/CommentsSection';
+import { MomentDetail } from '@site/src/components/MomentDetail';
+
+// 获取查询参数的工具函数
+const getQueryParam = (param: string): string | null => {
+    if (typeof window !== 'undefined') {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+    return null;
+};
+
+// 临时的 getMomentById 函数，直到导出问题解决
+const getMomentById = (id: string): MomentProps | undefined => {
+    return moments.find(moment => moment.id === id);
+};
 
 const variants: Variants = {
   visible: i => ({
@@ -33,7 +49,10 @@ const variants: Variants = {
 }
 
 function MomentsPageContent() : ReactNode {
-  // 状态管理
+  // 获取查询参数中的 moment ID
+  const [momentId, setMomentId] = useState<string | null>(null);
+  
+  // 原有的列表视图状态管理 - 必须在条件语句之前
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedTag, setSelectedTag] = useState<string>('');
   const [dateRange, setDateRange] = useState<{start: string, end: string}>({start: '', end: ''});
@@ -66,6 +85,110 @@ function MomentsPageContent() : ReactNode {
     // 按日期排序
     return sortMomentsByDate(filtered);
   }, [selectedCategory, selectedTag, dateRange]);
+  
+  useEffect(() => {
+    // 初始化时读取URL参数
+    const updateMomentId = () => {
+      const id = getQueryParam('id');
+      setMomentId(id);
+    };
+    
+    updateMomentId();
+    
+    // 监听浏览器前进/后退按钮事件
+    const handlePopState = () => {
+      updateMomentId();
+    };
+    
+    window.addEventListener('popstate', handlePopState);
+    
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+
+  // 如果有 momentId，显示单个时刻的详情页
+  if (momentId) {
+    const moment = getMomentById(momentId);
+    
+    if (!moment) {
+      return (
+        <div className="container margin-top--md margin-bottom--lg">
+          <div className="alert alert--danger">
+            <h4>时刻未找到</h4>
+            <p>抱歉，无法找到ID为 "{momentId}" 的时刻。</p>
+            <button 
+              className="button button--primary"
+              onClick={() => {
+                window.history.pushState({}, '', '/moments');
+                setMomentId(null);
+              }}
+            >
+              返回时刻列表
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="container margin-top--md margin-bottom--lg">
+        {/* 返回按钮 */}
+        <div className={styles.backButton}>
+          <button 
+            className="button button--secondary"
+            onClick={() => {
+              window.history.pushState({}, '', '/moments');
+              setMomentId(null);
+            }}
+          >
+            ← 返回时刻列表
+          </button>
+        </div>
+
+        {/* 时刻详情 */}
+        <MomentDetail moment={moment} />
+
+        {/* 分享操作 */}
+        <div className={styles.shareActions}>
+          <button 
+            className="button button--outline button--secondary"
+            onClick={() => {
+              const url = window.location.href;
+              if (navigator.share) {
+                navigator.share({
+                  title: moment.title,
+                  text: typeof moment.content === 'string' ? moment.content : moment.title,
+                  url: url,
+                });
+              } else {
+                navigator.clipboard.writeText(url);
+                alert('链接已复制到剪贴板！');
+              }
+            }}
+          >
+            📤 分享
+          </button>
+          <button 
+            className="button button--outline button--secondary"
+            onClick={() => {
+              const url = window.location.href;
+              navigator.clipboard.writeText(url);
+              alert('链接已复制到剪贴板！');
+            }}
+          >
+            🔗 复制链接
+          </button>
+        </div>
+
+        {/* 评论区 */}
+        <CommentsSection 
+          path={`/moments?id=${momentId}`}
+          serverURL="https://waline.ricmoe.com/" // 请替换为你的 Waline 服务器地址
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="container margin-top--md margin-bottom--lg">
@@ -181,13 +304,16 @@ function MomentsPageContent() : ReactNode {
       <div className={styles.masonry}>
         {filteredMoments.map((moment, idx) => (
           <motion.div
-            key={`${moment.title}-${moment.date}-${idx}`}
+            key={`${moment.id || moment.title}-${moment.date}-${idx}`}
             custom={idx}
             variants={variants}
             initial="hidden"
             animate="visible"
           >
-            <MomentCard {...moment} />
+            <MomentCard {...moment} onViewDetail={(id) => {
+              window.history.pushState({}, '', `/moments?id=${id}`);
+              setMomentId(id);
+            }} />
           </motion.div>
         ))}
       </div>
@@ -195,8 +321,15 @@ function MomentsPageContent() : ReactNode {
   );
 }
 
-function MomentCard({ title, content, date, author, location, style = 'simple', image, actions, avatar, tags }: MomentProps) : ReactNode {
+function MomentCard({ id, title, content, date, author, location, style = 'simple', image, actions, avatar, tags, onViewDetail }: MomentProps & { onViewDetail?: (id: string) => void }) : ReactNode {
     const cardClass = `card shadow--md ${styles[`card-${style}`] || ''}`;
+    
+    // 处理查看详情的点击事件
+    const handleViewDetail = () => {
+        if (id && onViewDetail) {
+            onViewDetail(id);
+        }
+    };
     
     // Render different card styles based on the style prop
     switch (style) {
@@ -222,13 +355,24 @@ function MomentCard({ title, content, date, author, location, style = 'simple', 
                         )}
                     </div>
                     <div className={`card__footer ${styles.momentCardFooter}`}>
-                        <small>{date}</small>
+                        <div className={styles.dateAndDetails}>
+                            <small>{date}</small>
+                            {id && (
+                                <span 
+                                    className={styles.viewDetailText}
+                                    onClick={handleViewDetail}
+                                >
+                                    查看详情
+                                </span>
+                            )}
+                        </div>
                         <div className={styles.authorInfo}>
                             <strong>{author}</strong>
                             {location && <><br/><small>{`@ ${location}`}</small></>}
                         </div>
                     </div>
-                    {actions && (
+                    {/* 原有的 actions（如果有的话） */}
+                    {actions && actions.length > 0 && (
                         <div className="card__footer">
                             <div className={`button-group button-group--block ${styles.cardActions}`}>
                                 {actions.map((action, idx) => (
@@ -287,9 +431,20 @@ function MomentCard({ title, content, date, author, location, style = 'simple', 
                         )}
                     </div>
                     <div className={`card__footer ${styles.momentCardFooter}`}>
-                        <small>{date}</small>
+                        <div className={styles.dateAndDetails}>
+                            <small>{date}</small>
+                            {id && (
+                                <span 
+                                    className={styles.viewDetailText}
+                                    onClick={handleViewDetail}
+                                >
+                                    查看详情
+                                </span>
+                            )}
+                        </div>
                     </div>
-                    {actions && (
+                    {/* 原有的 actions（如果有的话） */}
+                    {actions && actions.length > 0 && (
                         <div className="card__footer">
                             <div className="button-group button-group--block">
                                 {actions.map((action, idx) => (
@@ -320,7 +475,17 @@ function MomentCard({ title, content, date, author, location, style = 'simple', 
                         <h4>{title}</h4>
                         <p>{content}</p>
                         <div className={styles.minimalFooter}>
-                            <small>{date} • {author}</small>
+                            <div className={styles.dateAndDetails}>
+                                <small>{date} • {author}</small>
+                                {id && (
+                                    <span 
+                                        className={styles.viewDetailText}
+                                        onClick={handleViewDetail}
+                                    >
+                                        查看详情
+                                    </span>
+                                )}
+                            </div>
                             {location && <small>@ {location}</small>}
                         </div>
                     </div>
@@ -346,13 +511,24 @@ function MomentCard({ title, content, date, author, location, style = 'simple', 
                         )}
                     </div>
                     <div className={`card__footer ${styles.momentCardFooter}`}>
-                        <small>{date}</small>
+                        <div className={styles.dateAndDetails}>
+                            <small>{date}</small>
+                            {id && (
+                                <span 
+                                    className={styles.viewDetailText}
+                                    onClick={handleViewDetail}
+                                >
+                                    查看详情
+                                </span>
+                            )}
+                        </div>
                         <div className={styles.authorInfo}>
                             <strong>{author}</strong>
                             {location && <><br/><small>{`@ ${location}`}</small></>}
                         </div>
                     </div>
-                    {actions && (
+                    {/* 原有的 actions（如果有的话） */}
+                    {actions && actions.length > 0 && (
                         <div className="card__footer">
                             <div className={`button-group button-group--block ${styles.cardActions}`}>
                                 {actions.map((action, idx) => (
@@ -379,6 +555,12 @@ function MomentCard({ title, content, date, author, location, style = 'simple', 
 }
 
 export default function MomentsPage() : ReactNode {
+    // 调试：在控制台输出 moments 数据以检查 ID 生成情况
+    React.useEffect(() => {
+        console.log('Moments data with IDs:', moments);
+        console.log('First moment:', moments[0]);
+    }, []);
+    
     return (
         <Layout title="Moments" description="💖Record and Share Life Moments.💖">
             <header className="hero">
