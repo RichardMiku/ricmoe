@@ -183,8 +183,7 @@ function MomentsPageContent() : ReactNode {
 
         {/* 评论区 */}
         <CommentsSection 
-          path={`/moments?id=${momentId}`}
-          serverURL="https://waline.ricmoe.com/" // 请替换为你的 Waline 服务器地址
+          path={`/moments?id=${momentId}`} // 请替换为你的 Waline 服务器地址
         />
       </div>
     );
