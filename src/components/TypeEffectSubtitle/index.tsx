@@ -73,7 +73,8 @@ function TypeEffectSubtitle({ themeConfig }: FooterSubtitleProps): JSX.Element {
       // 確保 Typed.js 腳本已載入
       if (effect && typeof window.Typed === 'undefined') {
         try {
-          await getScript('https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js');
+          // await getScript('https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js');
+          await getScript('https://unpkg.com/typed.js@2.0.12/lib/typed.min.js');//针对国内使用unpkg
         } catch (error) {
           console.error('Error loading typed.js script:', error);
           displayContent = subContent[0] || '加載打字效果失敗';
