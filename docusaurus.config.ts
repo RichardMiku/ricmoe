@@ -1,7 +1,6 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
-import { tr } from 'framer-motion/client';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -97,26 +96,10 @@ const config: Config = {
             const {defaultCreateSitemapItems, ...rest} = params;
             const items = await defaultCreateSitemapItems(rest);
             
-            // 动态添加 moments 详情页面到 sitemap
-            const momentsData = await import('./data/Moments/index.js');
-            const moments = momentsData.default;
-            
-            const momentDetailItems = moments
-              .filter(moment => moment.id) // 只包含有 ID 的 moments
-              .map(moment => ({
-                url: `https://www.ric.moe/moments?id=${moment.id}`,
-                lastmod: moment.date,
-                changefreq: 'monthly' as const,
-                priority: 0.6
-              }));
-            
-            // 合并默认页面和动态 moments 页面
-            const allItems = [...items, ...momentDetailItems];
-            
             // 为不同类型的页面设置不同的优先级和更新频率
-            return allItems.map((item) => {
+            return items.map((item) => {
               // 为不同类型的页面设置不同的优先级和更新频率
-              if (item.url === 'https://www.ric.moe/') {
+              if (item.url === '/') {
                 // 首页最高优先级
                 return {
                   ...item,

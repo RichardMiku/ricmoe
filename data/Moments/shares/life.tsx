@@ -1,5 +1,6 @@
 import { MomentProps } from '../types';
 import { handleLike, handleShare } from '../actions';
+import React from 'react';
 
 // 生活相关的时刻分享
 export const lifeMoments: MomentProps[] = [
@@ -10,6 +11,7 @@ export const lifeMoments: MomentProps[] = [
                 🎉特别鸣谢 <a href='https://v.douyin.com/D4iot64VrWo/' target='_blank'>@小松啊</a>
             </>
         ),
+        // content: "🎉特别鸣谢 @小松啊",
         date: "2025-08-09",
         author: "ricmoe",
         style: 'photo-centric',
