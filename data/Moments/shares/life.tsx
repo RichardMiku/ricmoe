@@ -5,6 +5,14 @@ import React from 'react';
 // 生活相关的时刻分享
 export const lifeMoments: MomentProps[] = [
     {
+        title: "当你看晚霞的时候",
+        content: 'Tim已经快变成咸鱼梦想家了',
+        date: "2025-08-09",
+        author: "ricmoe",
+        style: 'photo-centric',
+        image: "https://img.240021.xyz/api/cfile/AgACAgUAAyEGAASPbgRdAAMUaJ76qVym6lZtUTIVvX_ZFFLGEB4AAuTMMRt5ZfhUGnopBrv2HVUBAAMCAAN4AAM2BA",
+    },
+    {
         title: "真男人开v8",
         content: (
             <>
