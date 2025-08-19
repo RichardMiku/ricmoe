@@ -1,5 +1,5 @@
 
-var jsapi_ticket = 'O3SMpm8bG7kJnF36aXbe8xNcJ5lBk8LW15uc45b3pL3cmalangPHTq3xNiru45oRyIPB1DI1FRcLCbYUQsfXiw';
+var jsapi_ticket = 'O3SMpm8bG7kJnF36aXbe8xNcJ5lBk8LW15uc45b3pL2PQQy__h6TJL6ji9vHrvXbnFtQsL6K2XX1obNBRLs4Kw';
 var share_url = window.location.href.split('#')[0];
 
 var config_data = {
