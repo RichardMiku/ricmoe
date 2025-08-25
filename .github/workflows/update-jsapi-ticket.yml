@@ -1,9 +1,9 @@
 name: Update WeChat JSAPI Ticket
 
 on:
-  schedule:
+  # schedule:
     # 每两小时执行一次 (UTC时间)
-    - cron: '0 */2 * * *'
+    # - cron: '0 */2 * * *'
   workflow_dispatch: # 允许手动触发
 
 permissions:
