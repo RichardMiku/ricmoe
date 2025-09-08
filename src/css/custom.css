@@ -34,7 +34,7 @@
 
 .theme-announcement-bar {
   font-size: 20px;
-  height: 2.5rem;
+  height: auto;
 
   /*
   --site-announcement-bar-stripe-color1: hsl(
