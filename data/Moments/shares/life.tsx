@@ -8,7 +8,7 @@ export const lifeMoments: MomentProps[] = [
         title: "真男人开v8",
         content: (
             <>
-                🎉特别鸣谢 <a href='https://v.douyin.com/D4iot64VrWo/' target='_blank'>@小松啊</a>
+                🎉特别鸣谢 <a href='https://v.douyin.com/D4iot64VrWo/' target='_blank'>@水火火</a>
             </>
         ),
         // content: "🎉特别鸣谢 @小松啊",
